@@ -1,16 +1,16 @@
 Package: Rcleaner
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Tools For cleaning data in R.
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "John", "Anstead-Jaacks",
+      email = "jansteadjaacks@usf.edu",
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Description: this is a compilation of a few functions I created for 
+performing basic cleaning on data frames.
+License: GNU 3.0
 Encoding: UTF-8
 LazyData: true
