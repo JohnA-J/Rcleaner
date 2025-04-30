@@ -2,13 +2,7 @@ Package: Rcleaner
 Type: Package
 Title: Tools For cleaning data in R.
 Version: 0.1.0
-Authors@R: c(
-    person(
-      "John", "Anstead-Jaacks",
-      email = "jansteadjaacks@usf.edu",
-      role = c("aut", "cre")
-    )
-  )
+Authors@R: "John Anstead-Jaacks <jansteadjaacks@usf.edu> [aut, cre]"
 Description: this is a compilation of a few functions I created for 
 performing basic cleaning on data frames.
 License: GNU 3.0
