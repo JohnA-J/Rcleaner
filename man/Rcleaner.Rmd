@@ -15,7 +15,7 @@ cleaning csv files after loading them into R studio is typically a long and ardu
 
 ------------------------------------------------------------------------
 
-## Function 1: NAconvert
+## Function 1: NAfix
 
 this function converts values in character columns from the string "N/A" to simply being NA values within the data, this problem is quite specific but I encountered this problem in several different data sets so I found it valuable to include. as we can see this happened in the year of release column in this data set.
 
