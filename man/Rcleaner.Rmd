@@ -9,6 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Introduction
+
+cleaning csv files after loading them into R studio is typically a long and arduous process; the goal of this package is to make the data cleaning process a little bit faster. These functions are ones that I have used in the past to clean data and in the form of this package will be easily accessible to me in the future. I'm well aware that there are much better tools than these to use when cleaning data but these are the few that I was able to come up with and use myself.
+
+------------------------------------------------------------------------
+
 ## Function 1: NAconvert
 
 this function converts values in character columns from the string "N/A" to simply being NA values within the data, this problem is quite specific but I encountered this problem in several different data sets so I found it valuable to include. as we can see this happened in the year of release column in this data set.
