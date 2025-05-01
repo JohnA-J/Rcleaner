@@ -370,11 +370,11 @@ few that I was able to come up with and use myself.</p>
 </div>
 <div id="function-1-nafix" class="section level2">
 <h2>Function 1: NAfix</h2>
-<p>this function converts values in character columns from the string
-“N/A” to simply being NA values within the data, this problem is quite
-specific but I encountered this problem in several different data sets
-so I found it valuable to include. as we can see this happened in the
-year of release column in this data set.</p>
+<p>this function converts values in character columns from selected
+strings primarily “N/A” to simply being NA values within the data, this
+problem is quite specific but I encountered this problem in several
+different data sets so I found it valuable to include. as we can see
+this happened in the year of release column in this data set.</p>
 <pre class="r"><code>testdata &lt;- read.csv(&quot;D:/R programming Final project/Rcleaner/data/videogamesales.csv&quot;)
 testdata[172:191,3]</code></pre>
 <pre><code>##  [1] &quot;2016&quot; &quot;1989&quot; &quot;2009&quot; &quot;1999&quot; &quot;2000&quot; &quot;2012&quot; &quot;2003&quot; &quot;1999&quot; &quot;2014&quot; &quot;2014&quot;
