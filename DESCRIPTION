@@ -7,3 +7,4 @@ Description: this is a compilation of a few functions I created for performing b
 License: GNU 3.0
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.3.2
