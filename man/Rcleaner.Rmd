@@ -1,0 +1,91 @@
+---
+title: "Rcleaner"
+author: "John Anstead-Jaacks"
+date: "2025-04-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Function 1: NAconvert
+
+this function converts values in character columns from the string "N/A" to simply being NA values within the data, this problem is quite specific but I encountered this problem in several different data sets so I found it valuable to include. as we can see this happened in the year of release column in this data set.
+
+```{r}
+testdata <- read.csv("D:/R programming Final project/Rcleaner/data/videogamesales.csv")
+testdata[172:191,3]
+NAfix <- function(df, string = "N/A") {df[] <- lapply(df, function(x)
+  {if (is.character(x)) {x[x == string] <- NA}
+  return(x)})
+  return(df)}
+testdata <- NAfix(testdata)
+testdata[172:191,3]
+```
+
+## Function 2: EMPTYremove
+
+this function removes empty columns and rows by checking the number of values in each row/column and if the number of values that are NA is less than the total number of rows/columns then the row/column is kept. This step in many cases won't clean too much out but in my view it's an important starting point. As we can see from the example below the function doesn't remove any of the data as there are no blank rows or columns.
+
+```{r}
+EMPTYremove <- function(df) {
+  df <- df[rowSums(is.na(df)) < ncol(df), ]
+  df <- df[, colSums(is.na(df)) < nrow(df)]
+  return(df)}
+head(testdata)
+testdata <- EMPTYremove(testdata)
+head(testdata)
+```
+
+## Function 3: Quicknumeric
+
+this function changes certain character type rows to be numeric instead. In many cases you'll get data that for one reason or another has been improperly classified. A very common example of this is when data that should be numeric is instead stored as character data. this function checks to see if a column contains only data that should be numeric and if it does converts it to numeric. as we can see in the example below the year of release column has been converted from character to numeric data.
+
+```{r}
+Quicknumeric <- function(df) {df[] <- lapply(df, function(x) {
+  if (is.character(x) && all(grepl("^[0-9.]+$", x[!is.na(x)]))) {
+  return(as.numeric(x))}
+  else {
+  return(x)}})
+  return(df)}
+str(testdata)
+testdata <- Quicknumeric(testdata)
+str(testdata)
+```
+
+## Function 4: SDnames
+
+this function takes all the column names in a data set and cleans them up making them more consistent and easy to manage. It accomplishes this by making every character lowercase and replacing any spaces or other special characters with underscores and removing underscores found at the beginning and end of titles. we can see that the column names were normalized in the example below.
+
+```{r}
+SDnames <- function(df) {
+  if (!is.data.frame(df)) stop()
+
+  clean_names <- tolower(gsub("[^[:alnum:]]+", "_", names(df)))
+  clean_names <- gsub("(^_|_$)", "", clean_names)
+  names(df) <- clean_names
+  return(df)}
+names(testdata)
+testdata <- SDnames(testdata)
+names(testdata)
+```
+
+## Function 5: NAreplace
+
+this function replaces NA values with either the median or the mean of the data (whichever you prefer). And allows you to select which columns are selected. in the print of 'testdata' below we can see that some values in the numeric columns are NA. but the function replaces them with the median value. in the case of this data set replacing the values with the mean or median is bad for the data considering that the data is more qualitative than quantitative but this function is still useful in many other cases.
+
+```{r}
+NAreplace <-  function(df, columns = NULL, method = "mean") {
+  if (is.null(columns)) {columns <- names(df)}
+  for (col in columns) {
+  if (is.numeric(df[[col]])) {
+  if (method == "mean") {df[[col]][is.na(df[[col]])] <- mean(df[[col]], na.rm = TRUE)}
+  else
+  if (method == "median") {df[[col]][is.na(df[[col]])] <- median(df[[col]], na.rm = TRUE)}
+  else {stop("options are 'mean' or 'median'.")}}}
+  return(df)}
+testdata[1:5, 11]
+testdata <- NAreplace(testdata, columns = c("critic_score") , method = "median")
+testdata[1:5,11]
+```

@@ -1,4 +1,4 @@
-#function 2: NAreplacer
+#function 5: NAreplacer
 NAreplace <-  function(df, columns = NULL, method = "mean") {
   if (is.null(columns)) {columns <- names(df)}
   for (col in columns) {
