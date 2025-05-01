@@ -1,4 +1,16 @@
-#function 5: NAreplacer
+#' Replaces `NA` values in specified numeric columns of a data frame with the column mean or median.
+#'
+#' @param df A data frame.
+#' @param columns all columns named are processed. If left NULL, all columns are used.
+#' @param method  the method used to fill NA values: "mean" or "median".
+#'
+#' @return A data frame with NA values replaced in the specified columns.
+#'
+#' @examples
+#' df <- data.frame(a = c(1, NA, 3), b = c(NA, 5, 6))
+#' NAreplace(df, columns = c("a"), method = "mean")
+#'
+#' @export
 NAreplace <-  function(df, columns = NULL, method = "mean") {
   if (is.null(columns)) {columns <- names(df)}
   for (col in columns) {
